@@ -14,8 +14,8 @@ public class Event {
     private Integer id;
     private String name;
     private String description;
-    private LocalDateTime beginEnrollmentDataTime;
-    private LocalDateTime closeEnrollmentDataTime;
+    private LocalDateTime beginEnrollmentDateTime;
+    private LocalDateTime closeEnrollmentDateTime;
     private LocalDateTime beginEventDateTime;
     private LocalDateTime endEventDateTime;
     private String location; // (optional) 이게 없으면 온라인 모임

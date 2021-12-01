@@ -38,8 +38,8 @@ public class EventControllerTests {
         EventDto event = EventDto.builder()
                 .name("Spring")
                 .description("REST API Deveplopment with Spring")
-                .beginEnrollmentDataTime(LocalDateTime.of(2021, 11, 29, 15,55))
-                .closeEnrollmentDataTime(LocalDateTime.of(2021, 11, 30, 15,55))
+                .beginEnrollmentDateTime(LocalDateTime.of(2021, 11, 29, 15,55))
+                .closeEnrollmentDateTime(LocalDateTime.of(2021, 11, 30, 15,55))
                 .beginEventDateTime(LocalDateTime.of(2021, 12, 01, 11, 00))
                 .endEventDateTime(LocalDateTime.of(2021, 12, 02, 11, 00))
                 .basePrice(100)
@@ -68,8 +68,8 @@ public class EventControllerTests {
                 .id(100)
                 .name("Spring")
                 .description("REST API Deveplopment with Spring")
-                .beginEnrollmentDataTime(LocalDateTime.of(2021, 11, 29, 15,55))
-                .closeEnrollmentDataTime(LocalDateTime.of(2021, 11, 30, 15,55))
+                .beginEnrollmentDateTime(LocalDateTime.of(2021, 11, 29, 15,55))
+                .closeEnrollmentDateTime(LocalDateTime.of(2021, 11, 30, 15,55))
                 .beginEventDateTime(LocalDateTime.of(2021, 12, 01, 11, 00))
                 .endEventDateTime(LocalDateTime.of(2021, 12, 02, 11, 00))
                 .basePrice(100)
@@ -92,6 +92,27 @@ public class EventControllerTests {
     @Test
     public void createEvent_Bad_Request_Empty_Input() throws Exception {
         EventDto eventDto = EventDto.builder().build();
+
+        this.mockMvc.perform(post("/api/events")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void createEvent_Bad_Request_Wrong_Input() throws Exception {
+        EventDto eventDto = EventDto.builder()
+                .name("Spring")
+                .description("REST API Deveplopment with Spring")
+                .beginEnrollmentDateTime(LocalDateTime.of(2021, 11, 26, 15,55))
+                .closeEnrollmentDateTime(LocalDateTime.of(2021, 11, 25, 15,55))
+                .beginEventDateTime(LocalDateTime.of(2021, 12, 02, 11, 00))
+                .endEventDateTime(LocalDateTime.of(2021, 12, 01, 11, 00))
+                .basePrice(10000)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("강남역 D2 스타텁 팩토리")
+                .build();
 
         this.mockMvc.perform(post("/api/events")
                         .contentType(MediaType.APPLICATION_JSON)

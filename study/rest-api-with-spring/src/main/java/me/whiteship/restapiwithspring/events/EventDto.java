@@ -18,9 +18,9 @@ public class EventDto {
     @NotEmpty
     private String description;
     @NotNull
-    private LocalDateTime beginEnrollmentDataTime;
+    private LocalDateTime beginEnrollmentDateTime;
     @NotNull
-    private LocalDateTime closeEnrollmentDataTime;
+    private LocalDateTime closeEnrollmentDateTime;
     @NotNull
     private LocalDateTime beginEventDateTime;
     @NotNull
